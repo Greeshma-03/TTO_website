@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar"
 import Navbar2 from "./components/Navbar2"
 import Footer from "./components/Footer"
 import Home from "./pages/Home"
+import Catalogue from "./pages/Catalogue"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
@@ -16,6 +17,7 @@ function App() {
                 <Navbar2/>
                 <Switch>
                     <Route path="/" exact component={Home} />
+                    <Route path="/tech" exact component={Catalogue} />
 
                     <h1>asDada</h1>
                 </Switch>
