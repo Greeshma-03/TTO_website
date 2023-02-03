@@ -11,6 +11,8 @@ function Footer() {
 
         <div className="footer">
             <div className="socialMedia">
+            <h1 style={{color:" white"}} className="text-center" >Contact Us</h1>
+
                 <InstagramIcon /><TwitterIcon /><FacebookIcon /><LinkedInIcon />
             </div>
             <p1>hello nithin</p1>
