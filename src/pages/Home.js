@@ -21,12 +21,15 @@ function Home() {
     return (
 
 
-        <div className="home" style={{ backgroundColor: '#D4F1F4' }} style={{ height: "170vh" }} >
+        <div className="home" style={{ backgroundColor: '#D4F1F4' }} style={{ height: "220vh" }} >
             <Container >
                 <h1 className="text-center" style={{ marginBottom: '40px' }}>Technology Transfer Office</h1>
                 <div className="row">
+
+
+
                     <div className="col-sm">
-                        
+
                         <div class="card" >
                             <div className='mask' style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
                                 <div className='d-flex justify-content-center align-items-center h-100'>
@@ -83,60 +86,67 @@ function Home() {
                 </div >
 
             </Container>
+
+
+
             <Container>
 
-                <Row className="my-5">
-                    <Col xs={9} className="d-flex flex-fill" style={{ textAlign: 'left' }}>
-                        <Card className="flex-fill" style={{ backgroundColor: 'lavender' }}  >
-                            <Card.Header as="h5">Latest Technology</Card.Header>
-                            <Card.Body className="flex-fill">
-                                <Card.Title>Lorem Ipsium</Card.Title>
-                                <Card.Text>
-                                    With supporting text below as a natural lead-in to additional content.
-                                </Card.Text>
-                                <Button variant="primary">View</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col xs={3} style={{ width: '400px' }} >
-                        <Image src={img8} className="img-fluid" style={{ border: '20px solid lavender' }} />
-                    </Col>
 
 
+                <Row className="justify-content-left align-items-left my-5 text-white"  style={{ backgroundImage: `url("https://mdbootstrap.com/img/new/standard/city/023.webp")`, backgroundSize: 'cover', backgroundPosition: 'bottom right 15%' }} >
+                    <Col xs={6} style={{ maxWidth: '65%' }}>
+                        <div style={{ padding: "30px 30px" }} >
+
+                            <h1>Latest news/blogs</h1>
+                            <p>
+                                Machine learning algorithms are capable of processing vast amounts of data and discovering patterns and insights that would otherwise be hidden. This allows companies to make better and more informed decisions, leading to improved business performance and increased profitability. For example, in the finance industry, machine learning algorithms are being used to detect fraudulent activity and improve risk management. In the healthcare industry, machine learning is being used to develop personalized treatment plans and predict disease outbreaks
+                            </p>
+                            <Button variant="success">More Info</Button>
+
+                        </div>
+                    </Col>
                 </Row>
-                
-            
-                <Row className="my-5">
-                    <Col xs={9} className="d-flex flex-fill" style={{ textAlign: 'left' }}>
-                        <Card className="flex-fill" style={{ backgroundColor: 'lavenderblush' }}  >
-                            <Card.Header as="h5">Latest Product</Card.Header>
-                            <Card.Body className="flex-fill">
-                                <Card.Title>IIITH Canvas</Card.Title>
-                                <Card.Text>
-                                    With supporting text below as a natural lead-in to additional content.
-                                </Card.Text>
-                                <Button variant="primary">View</Button>
-                            </Card.Body>
-                        </Card>
+                <Row className="my-5" style={{ backgroundColor: 'lightblue' }}>
+                    <Col xs={9} style={{ textAlign: 'left', maxWidth: '55%' }}>
+                        <div style={{ padding: '20px 30px' }}>
+                            <h1>Latest Technology</h1>
+                            <p>
+                                Machine learning algorithms are capable of processing vast amounts of data and discovering patterns and insights that would otherwise be hidden. This allows companies to make better and more informed decisions, leading to improved business performance and increased profitability. For example, in the finance industry, machine learning algorithms are being used to detect fraudulent activity and improve risk management. In the healthcare industry, machine learning is being used to develop personalized treatment plans and predict disease outbreaks
+                            </p>
+                        </div>
                     </Col>
-                    <Col xs={3} style={{ width: '400px' }} >
-                        <Image src={img16} className="img-fluid" style={{ border: '20px solid lavenderblush' }} />
+                    <Col xs={3} style={{ width: '460px', float: 'right', padding: ' 25px 0 20px 0' }}>
+                        <Image src={img8} className="img-fluid" />
                     </Col>
-
-
                 </Row>
 
+
+                <Row className="my-5" style={{ backgroundColor: 'lavenderblush' }}>
+                    <Col xs={9} style={{ textAlign: 'left', maxWidth: '55%' }}>
+                        <div style={{ padding: '20px 30px' }}>
+                            <h1>Latest Product</h1>
+                            <p>
+                                Machine learning algorithms are capable of processing vast amounts of data and discovering patterns and insights that would otherwise be hidden. This allows companies to make better and more informed decisions, leading to improved business performance and increased profitability. For example, in the finance industry, machine learning algorithms are being used to detect fraudulent activity and improve risk management. In the healthcare industry, machine learning is being used to develop personalized treatment plans and predict disease outbreaks
+                            </p>
+                        </div>
+                    </Col>
+                    <Col xs={3} style={{ width: '460px', float: 'right', padding: ' 25px 0 20px 0' }}>
+                        <Image src={img16} className="img-fluid" />
+                    </Col>
+                </Row>
+
                 <Row className="my-5">
-                    <grid style={{ backgroundColor: "lightblue", width: "100%", padding: " 30px 30px" }}>
+                    <grid style={{ backgroundColor: "lavender", width: "100%", padding: " 30px 30px" }}>
                         <h3>
                             Quick Links
-                            <ul>
-                                <li><a href="#" style={{ textDecoration: "underline" }}>www.google.com</a></li>
-                                <li><a href="#" style={{ textDecoration: "underline" }}>www.google.com</a></li>
-                                <li><a href="#" style={{ textDecoration: "underline" }}>www.google.com</a></li>
-                                <li><a href="#" style={{ textDecoration: "underline" }}>www.google.com</a></li>
-                            </ul>
                         </h3>
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                            <a style={{ textDecoration: "underline" }} href="#">iiit.ac.in</a>
+                            <a style={{ textDecoration: "underline" }} href="#">portals.iiit.ac.in</a>
+                            <a style={{ textDecoration: "underline" }} href="#">tto.iiit.ac.in</a>
+                            <a style={{ textDecoration: "underline" }} href="#">www.google.com</a>
+
+                        </div>
                     </grid>
 
                 </Row>
