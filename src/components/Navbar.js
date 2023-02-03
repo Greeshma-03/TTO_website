@@ -6,7 +6,7 @@ import "../styles/Navbar.css"
 function Navbar() {
     return (
 
-        <div className="navbar">
+        <div className="navbar" style={{ marginBottom: "10px" }}>
             <div className='leftSide'>
                 <img src={Logo} />
             </div>

@@ -16,7 +16,7 @@ function Navbar2() {
     return (
 
         <div className="navbar2" style={{ fontSize: '20px' }}>
-            <div className="leftSide">
+            <div className='leftSide'>
                 <div className='hiddenLinks' id={openLinks ? "open" : "close"}>
                     <Link to="/" style={{ marginRight: "40px" }}>Home</Link>
                     <Link to="/tech" style={{ marginRight: "10px" }}>Technology Catalogue</Link>
