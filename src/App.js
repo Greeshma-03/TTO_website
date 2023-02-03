@@ -1,36 +1,32 @@
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import "./App.css";
-
-import Home from "./components/common/Home";
-import Patent_page from "./components/common/patent";
-import Navbar from "./components/templates/Navbar";
-import Publications from "./components/common/publications";
-
-
-const Layout = () => {
-
-  return (
-    <div>
-      <Navbar />
-      <div className="container">
-        <Outlet />
-      </div>
-    </div>
-  );
-};
+import "./App.css"
+import Navbar from "./components/Navbar"
+import Navbar2 from "./components/Navbar2"
+import Footer from "./components/Footer"
+import Home from "./pages/Home"
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="register" element={<Patent_page/>} />
-        <Route path="login" element={<Publications />} />
-       
-      </Routes>
-    </BrowserRouter>
-  );
-}
+    return (
 
+        <div className="App">
+            <Router>
+                
+                <Navbar />
+                <Navbar2/>
+                <Switch>
+                    <Route path="/" exact component={Home} />
+
+                    <h1>asDada</h1>
+                </Switch>
+                <Footer/>
+
+            </Router>
+
+        </div>
+
+
+
+    );
+}
 export default App;
