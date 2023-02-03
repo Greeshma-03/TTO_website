@@ -15,7 +15,7 @@ function Navbar2() {
 
     return (
 
-        <div className="navbar2">
+        <div className="navbar2"z>
             <div className="leftSide">
                 <div className='hiddenLinks' id={openLinks ? "open" : "close"}>
                     <Link to="/">Home</Link>
