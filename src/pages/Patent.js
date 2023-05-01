@@ -8,6 +8,8 @@ import ButtonRow from "../components/Buttonrow"
 import { Maximize } from "@material-ui/icons"
 import { Grid, Paper, Button, Divider } from '@material-ui/core';
 import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -43,20 +45,21 @@ function Component1() {
 }
 
 
-function Component2() {
+function Component2(patent) {
+    console.log(patent);
     return (
         <div className="headerContainer" style={{ textAlign: "left" }}>
             <div >
-                <p style={{ fontSize: "1.5vw", fontWeight: "500", color: '#2C2C2C' }}>360 Degree Stereo Video Camera</p>
+                <p style={{ fontSize: "1.5vw", fontWeight: "500", color: '#2C2C2C' }}>{patent.patent.Name}</p>
                 <img src={require('../Img/image 21.png')} alt="your-image" style={{ width: "63vw", height: "300px", padding: "0.6vw 0 1vw 0" }} />
 
                 <div style={{ paddingBottom: "3vw" }}>
-                    <p style={{ fontSize: "1.15vw", fontWeight: 300, color: "#1A1A1A" }}>Faculty Name: &nbsp; Anoop Namboodari</p>
-                    <p style={{ fontSize: "1.15vw", fontWeight: 300, display: 'block', color: "#1A1A1A" }}>Keywords: &nbsp;   Panaromic View, &nbsp;Single Camera, &nbsp;Virtual and augmented Reality</p>
+                    <p style={{ fontSize: "1.15vw", fontWeight: 300, color: "#1A1A1A" }}>Faculty Name: &nbsp; {patent.patent.FacultyName}</p>
+                    <p style={{ fontSize: "1.15vw", fontWeight: 300, display: 'block', color: "#1A1A1A" }}>Keywords: {patent.patent.Keywords.map(result => ( <div>{result} &nbsp </div> ))}</p>
                 </div>
 
                 <div >
-                    <ButtonRow />
+                    <ButtonRow patent={patent}/>
                 </div>
             </div>
         </div>
@@ -65,15 +68,31 @@ function Component2() {
 }
 
 function Patent() {
+    const { id } = useParams();
+    const [patent, setPatent] = useState(null);
+
+    console.log({ id });
+
+    useEffect(() => {
+        // Call your API here and store the response in searchResults state
+        fetch(`http://localhost:4000/tech/technology/${id}`)
+            .then(response => response.json())
+            .then(data => {setPatent(data); console.log(data);});
+    }, []);
+
+    if (!patent) {
+        return <div>Loading...</div>;
+      }
 
 
     return (
+
         <>
             <div>
                 <div style={{ paddingTop: "9.08vw" }}>
                     <p style={{ fontFamily: "Montserrat", fontSize: "1.1vw", margin: 0, paddingLeft: "3em" }}>
                         <span style={{ color: '#9D9D9D', fontWeight: 500 }}>Home / CVIT /</span>
-                        <span style={{ color: '#1F669F', fontWeight: 500 }}> 360 Degree Stereo Video Camera
+                        <span style={{ color: '#1F669F', fontWeight: 500 }}> {patent.Name}
                         </span>
                     </p>
                 </div>
@@ -96,7 +115,7 @@ function Patent() {
                         width: '72vw',
                         fontFamily: 'Prompt',
                     }}>
-                        <Component2 />
+                        <Component2  patent={patent}/>
                     </div>
                 </div>
             </div>

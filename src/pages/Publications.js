@@ -17,6 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { FaCalendarAlt } from "react-icons/fa";
 import 'react-calendar/dist/Calendar.css';
 import { Search } from '@material-ui/icons';
+import Modal from 'react-modal';
 
 import ResponsiveImage from "../components/ResponsiveImage"
 
@@ -24,6 +25,21 @@ import { InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 import upload from '../Img/upload.png'
+import axios from 'axios';
+
+// Modal.setAppElement('#yourAppElement');
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -148,6 +164,12 @@ function Component1() {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(5);
+    const [patentTitle, setpatentTitle] = useState("");
+    const [patentLab, setpatentLab] = useState("");
+    const [patentYear, setpatentYear] = useState("");
+    const [patentNumber, setpatentNumber] = useState("");
+    const [patentHolderName, setpatentHolderName] = useState("");
+
 
 
     const indexOfLastUser = currentPage * usersPerPage;
@@ -160,6 +182,41 @@ function Component1() {
         pages.push(i);
     }
 
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    const [searchQuery, setSearchQuery] = useState("");
+    const [techName, settechName] = useState("");
+    const [techCenter, settechCenter] = useState("");
+    const [techFaculty, settechFaculty] = useState("");
+    const [techOverview, settechOverview] = useState("");
+    const [techDescription, settechDescription] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const newPatent = {
+            Title: patentTitle,
+            Center_Name: patentLab,
+            Year: patentYear,
+            Patent_Number: patentNumber,
+            Faculty: [patentHolderName],
+
+        }
+        axios.post('http://localhost:4000/patents/patent', newPatent)
+            .then(function (res) {
+                window.location = "/publications"
+            });
+
+        alert(`The name you entered was: ${patentTitle}`)
+    }
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
     const handleClick = (event) => {
         setCurrentPage(Number(event.target.id));
     };
@@ -186,8 +243,132 @@ function Component1() {
                     </Grid>
                     <Grid item xs={6} sm={6} md={6}>
                         <Paper style={{ backgroundColor: "#09A5AF", padding: "0.35vw 0", borderRadius: "0.86vw" }}>
-                            <span onClick={() => window.location.href = '#'} style={{ fontSize: "1.3vw", color: "#FEFEFE" }}>&nbsp;<ResponsiveImage src={upload} maxHeight={40} maxWidth={40} />&nbsp; Upload</span>
+                            <span onClick={openModal} style={{ fontSize: "1.3vw", color: "#FEFEFE" }}>&nbsp;<ResponsiveImage src={upload} maxHeight={40} maxWidth={40} />&nbsp; Upload</span>
+
                         </Paper>
+                        <Modal
+                            isOpen={modalIsOpen}
+                            onRequestClose={closeModal}
+                            contentLabel="Example Modal"
+                            style={{
+                                overlay: {
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    backgroundColor: '#F1FEFF;',
+                                },
+                                content: {
+                                    width: '60%',
+                                    height: '60%',
+                                    margin: 'auto',
+                                },
+                                fontFamily: "Prompt"
+                            }}
+                        >
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            </div>
+
+
+                            <Grid container spacing={0} >
+                                <Grid item xs={4} sm={4} md={4}>
+                                    {/* <p style={{ color: "#2C2C2C", fontSize: "1.87vw", fontWeight: 600 }}>Upload Technology</p> */}
+                                </Grid>
+                                <Grid item xs={4} sm={4} md={4}>
+                                    <p style={{ textAlign: 'center', font: "Prompt", fontSize: "1.63vw", fontColor: "#2C2C2C",fontWeight:"400" }}>Add Patent</p>
+                                </Grid>
+                                <Grid item xs={3} sm={3} md={3}>
+                                    {/* <Button variant="contained" style={{ font: "Roboto", fontWeight: 500, textTransform: 'none', fontSize: "1.14vw", backgroundColor: '#09A5AF', color: '#FFFFFF', borderRadius: "2.7vw", padding: "1vw 2.2vw", maxHeight: '3.2vw' }}>
+                                        Upload Technology
+                                    </Button> */}
+                                </Grid>
+                                <Grid item xs={1} sm={1} md={1} container justify="flex-end">
+                                    <button onClick={closeModal} style={{transform: 'scale(0.6)',width: '1.5vw', height: '1.5vw', borderRadius: '1vw'}}>X</button>
+                                </Grid>
+                            </Grid>
+
+
+                            <form onSubmit={handleSubmit} style={{ fontFamily: "Prompt", fontSize: "1.13vw" }}>
+                                <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', fontFamily: "Prompt" }}>
+                                    <label style={{ flex: '0 0 10.8vw' }}>Patent Title</label>
+                                    <input
+                                        type="text"
+                                        value={techName}
+                                        onChange={(e) => settechName(e.target.value)}
+                                        style={{ flex: '1', maxWidth: '300px', backgroundColor: "#F1FEFF", border: "0.058vw solid #09A5AF" }}
+                                    />
+                                </div>
+                                <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+                                    <label style={{ flex: '0 0 200px' }}>Patent Status</label>
+                                    <input
+                                        type="text"
+                                        value={techCenter}
+                                        onChange={(e) => settechCenter(e.target.value)}
+                                        style={{ flex: '1', maxWidth: '300px', backgroundColor: "#F1FEFF", border: "0.058vw solid #09A5AF" }}
+                                    />
+                                </div>
+                                <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+                                    <label style={{ flex: '0 0 200px' }}>Research lab</label>
+                                    <input
+                                        type="text"
+                                        value={techFaculty}
+                                        onChange={(e) => settechFaculty(e.target.value)}
+                                        style={{ flex: '1', maxWidth: '300px', backgroundColor: "#F1FEFF", border: "0.1vw solid #09A5AF" }}
+                                    />
+                                </div>
+
+                                <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+                                    <label style={{ flex: '0 0 200px' }}>Patent Number</label>
+                                    <input
+                                        type="text"
+                                        value={techOverview}
+                                        onChange={(e) => settechOverview(e.target.value)}
+                                        style={{ flex: '1', maxWidth: '300px', height: '10.37vw', backgroundColor: "#F1FEFF", border: "0.058vw solid #09A5AF" }}
+
+                                    />
+                                </div>
+
+                                <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+                                    <label style={{ flex: '0 0 200px' }}>Patent Holder Names</label>
+                                    <input
+                                        type="text"
+                                        value={techDescription}
+                                        onChange={(e) => settechDescription(e.target.value)}
+                                        style={{ flex: '1', maxWidth: '300px', height: '3vw', backgroundColor: "#F1FEFF", border: "0.058vw solid #09A5AF" }}
+                                    />
+                                </div>
+
+                                <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+                                    <label style={{ flex: '0 0 200px' }}>Add File</label>
+                                    <input
+                                        type="text"
+                                        value={techOverview}
+                                        onChange={(e) => settechOverview(e.target.value)}
+                                        style={{ flex: '1', maxWidth: '300px', height: '10.37vw', backgroundColor: "#F1FEFF", border: "0.058vw solid #09A5AF" }}
+
+                                    />
+                                </div>
+
+
+                                {/* <div style={{ display: 'flex', alignItems: "flex-end" }}>
+                                    <Button variant="contained" style={{ font: "Roboto", fontWeight: 500, textTransform: 'none', fontSize: "1.34vw", backgroundColor: '#09A5AF', color: '#FFFFFF', borderRadius: "2.7vw", padding: "0 2.2vw", maxHeight: '2.7em' }}>
+                                        Upload Technology
+                                    </Button>
+                                </div> */}
+
+                                <Grid container spacing={0} >
+                                    <Grid item xs={4} sm={4} md={4}>
+                                        {/* <p style={{ color: "#2C2C2C", fontSize: "1.87vw", fontWeight: 600 }}>Upload Technology</p> */}
+                                    </Grid>
+                                    <Grid item xs={4} sm={4} md={4}>
+                                        {/* <p style={{ color: "#2C2C2C", fontSize: "1.87vw", fontWeight: 600 }}>Upload Technology</p> */}
+                                    </Grid>
+                                    <Grid item xs={4} sm={4} md={4}>
+                                        <Button variant="contained" style={{ font: "Roboto", fontWeight: 500, textTransform: 'none', fontSize: "1.14vw", backgroundColor: '#09A5AF', color: '#FFFFFF', borderRadius: "2.7vw", padding: "1vw 2.2vw", maxHeight: '3.2vw' }}>
+                                            Upload Patent
+                                        </Button>                                    </Grid>
+                                </Grid>
+                            </form>
+                        </Modal>
                     </Grid>
                 </Grid>
                 <p style={{ color: '#2C2C2C', fontSize: "1.73vw", fontWeight: '400', paddingTop: "2vw" }}>
@@ -212,12 +393,12 @@ function Component1() {
                 <div style={{ fontSize: "1.28vw", fontWeight: '300' }}>
                     <p style={{ color: activeIndex === 9 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(9)}>Machine Learning Lab</p>
                     <p style={{ color: activeIndex === 10 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(10)}>Robotics Research Centre</p>
-                    <p style={{ color: activeIndex === 11? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(11)}>Cognitive science Lab</p>
+                    <p style={{ color: activeIndex === 11 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(11)}>Cognitive science Lab</p>
                     <p style={{ color: activeIndex === 12 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(12)}>Computer Systems Group</p>
                     <p style={{ color: activeIndex === 13 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(13)}>Robotics Research Centre</p>
                     <p style={{ color: activeIndex === 14 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(14)}>Cognitive science Lab</p>
-                    <a style={{ color:  "#1369CB",textDecoration:"None"}} href="#" >Show More</a>
-                    
+                    <a style={{ color: "#1369CB", textDecoration: "None" }} href="#" >Show More</a>
+
                 </div>
 
             </div>
@@ -230,8 +411,8 @@ function Component1() {
 
                 </p>
                 <Grid container spacing={0}>
-                    <Grid item xs={12} sm={12} md={12} style={{padding:"1vw 0 5vw 0"}}>
-                        <Typography style={{ color: '#2C2C2C', fontSize: "0.97vw", fontWeight: '400',fontFamily:"Prompt" }}>Start Date</Typography>
+                    <Grid item xs={12} sm={12} md={12} style={{ padding: "1vw 0 5vw 0" }}>
+                        <Typography style={{ color: '#2C2C2C', fontSize: "0.97vw", fontWeight: '400', fontFamily: "Prompt" }}>Start Date</Typography>
                         <div style={{ position: "absolute" }}>
                             <TextField
                                 style={{
@@ -275,63 +456,63 @@ function Component1() {
 
 
                     <Grid item xs={12} sm={12} md={12}>
-                    <Typography style={{ color: '#2C2C2C', fontSize: "0.97vw", fontWeight: '400',fontFamily:"Prompt" }}>End Date</Typography>
-                    <div style={{ position: "absolute" }}>
-                        <TextField
-                            style={{
-                                background: "#FFFFFF",
-                                boxShadow: '0px 4px 4px rgba(194, 194, 194, 0.25), 4px 4px 4px rgba(163, 163, 163, 0.25)'
-                            }}
-                            variant="outlined"
-                            size="small"
-                            value={endDate.toLocaleDateString()}
-                            InputProps={{
-                                endAdornment: (
-                                    <FaCalendarAlt
-                                        className={classes.icon}
-                                        onClick={toggleCalendar2}
-                                        style={{ cursor: "pointer", color: '#626262' }}
-                                    />
-                                ),
-                            }}
-                        />
-                        {showCalendar2 && (
-                            <div
-                            // style={{
-                            //     position: 'absolute',
-                            //     top: '-10vw',
-                            //     right: '-15vw',
-                            //     zIndex: '9999',
-                            //     background: 'radial-gradient(105.48% 170.35% at 0% 0%, rgba(9, 165, 175, 0.2) 0%, rgba(85, 219, 227, 0.2) 77.08%, rgba(194, 251, 255, 0.2) 100%)',
-                            //     boxShadow: '2px 16px 19px rgba(0, 0, 0, 0.09)',
-                            //     backdropFilter: 'blur(40px)',
-                            //     borderRadius: '8px',
-                            //   }}
-                            >
-                                <DatePicker
-                                    selected={endDate}
-                                    onChange={(date) => setEndDate(date)}
-                                    dateFormat="yyyy/MM/dd"
-                                    onClickOutside={() => setShowCalendar2(false)}
-                                    inline
+                        <Typography style={{ color: '#2C2C2C', fontSize: "0.97vw", fontWeight: '400', fontFamily: "Prompt" }}>End Date</Typography>
+                        <div style={{ position: "absolute" }}>
+                            <TextField
+                                style={{
+                                    background: "#FFFFFF",
+                                    boxShadow: '0px 4px 4px rgba(194, 194, 194, 0.25), 4px 4px 4px rgba(163, 163, 163, 0.25)'
+                                }}
+                                variant="outlined"
+                                size="small"
+                                value={endDate.toLocaleDateString()}
+                                InputProps={{
+                                    endAdornment: (
+                                        <FaCalendarAlt
+                                            className={classes.icon}
+                                            onClick={toggleCalendar2}
+                                            style={{ cursor: "pointer", color: '#626262' }}
+                                        />
+                                    ),
+                                }}
+                            />
+                            {showCalendar2 && (
+                                <div
+                                // style={{
+                                //     position: 'absolute',
+                                //     top: '-10vw',
+                                //     right: '-15vw',
+                                //     zIndex: '9999',
+                                //     background: 'radial-gradient(105.48% 170.35% at 0% 0%, rgba(9, 165, 175, 0.2) 0%, rgba(85, 219, 227, 0.2) 77.08%, rgba(194, 251, 255, 0.2) 100%)',
+                                //     boxShadow: '2px 16px 19px rgba(0, 0, 0, 0.09)',
+                                //     backdropFilter: 'blur(40px)',
+                                //     borderRadius: '8px',
+                                //   }}
+                                >
+                                    <DatePicker
+                                        selected={endDate}
+                                        onChange={(date) => setEndDate(date)}
+                                        dateFormat="yyyy/MM/dd"
+                                        onClickOutside={() => setShowCalendar2(false)}
+                                        inline
                                     // style={{
                                     //     background: 'radial-gradient(105.48% 170.35% at 0% 0%, rgba(9, 165, 175, 0.2) 0%, rgba(85, 219, 227, 0.2) 77.08%, rgba(194, 251, 255, 0.2) 100%)',
                                     //     boxShadow: '2px 16px 19px rgba(0, 0, 0, 0.09)',
                                     //     backdropFilter: 'blur(40px)',
                                     //     borderRadius: '8px',
                                     //   }}
-                                
-                                />
-                            </div>
-                        )}
-                    </div>
+
+                                    />
+                                </div>
+                            )}
+                        </div>
+
+                    </Grid>
+
 
                 </Grid>
 
-
-            </Grid>
-
-        </div>
+            </div>
         </>
 
 
@@ -379,24 +560,37 @@ const DropdownMenu = () => {
 
 
 function Component2() {
+
+    const [patents, setpatents] = useState([]);
+
+    useEffect(() => {
+        // Call your API here and store the response in searchResults state
+        fetch('http://localhost:4000/patents/patents')
+            .then(response => response.json())
+            .then(data => setpatents(data));
+    }, []);
+
+
     return (
         <div className="headerContainer" style={{ textAlign: "left" }}>
             <div >
-                <Grid item xs={10} sm={10} md={10} style={{  paddingBottom: "6vw" }}>
+                {patents.map(result => (
+                    <Grid item xs={10} sm={10} md={10} style={{ paddingBottom: "6vw" }} key={result.id}>
+                        <p style={{ fontWeight: "300", fontSize: "1.5vw" }}> Patent | <span style={{ color: "#1191A3" }}> {result.Center_Name} </span>| <span style={{ color: "#08C089" }}> {result.Year} </span> </p>
+                        <p style={{ fontWeight: "500", color: "#2C2C2C", fontSize: "1.83vw" }}>{result.Title}</p>
+                        <p style={{ fontWeight: "300", color: "#525252", fontSize: "1.62vw" }}>Application/Patent No - {result.Patent_Number}</p>
+                        <p style={{ fontWeight: "400", color: "#A7A6A6" }}>{result.Faculty.map(result2 => (<p>{result2}</p>))}</p>
+                    </Grid>
+                ))}
+
+                <Grid item xs={10} sm={10} md={10} style={{ paddingBottom: "6vw" }}>
                     <p style={{ fontWeight: "300", fontSize: "1.5vw" }}> Patent | <span style={{ color: "#1191A3" }}> Machine Learning Lab </span>| <span style={{ color: "#08C089" }}> US Patent Granted </span> </p>
                     <p style={{ fontWeight: "500", color: "#2C2C2C", fontSize: "1.83vw" }}>System and Method For Capturing Horizontal Disparity Stereo Panorama</p>
                     <p style={{ fontWeight: "300", color: "#525252", fontSize: "1.62vw" }}>Application/Patent No - US1054249B2, Application US15/627,224</p>
                     <p style={{ fontWeight: "400", color: "#A7A6A6" }}>Prof. Anoop Namboodiri, Mr.Rajat Agarwal, Amrisha Vohra</p>
                 </Grid>
 
-                <Grid item xs={10} sm={10} md={10} style={{  paddingBottom: "6vw" }}>
-                    <p style={{ fontWeight: "300", fontSize: "1.5vw" }}> Patent | <span style={{ color: "#1191A3" }}> Machine Learning Lab </span>| <span style={{ color: "#08C089" }}> US Patent Granted </span> </p>
-                    <p style={{ fontWeight: "500", color: "#2C2C2C", fontSize: "1.83vw" }}>System and Method For Capturing Horizontal Disparity Stereo Panorama</p>
-                    <p style={{ fontWeight: "300", color: "#525252", fontSize: "1.62vw" }}>Application/Patent No - US1054249B2, Application US15/627,224</p>
-                    <p style={{ fontWeight: "400", color: "#A7A6A6" }}>Prof. Anoop Namboodiri, Mr.Rajat Agarwal, Amrisha Vohra</p>
-                </Grid>
-
-                <Grid item xs={10} sm={10} md={10} style={{  paddingBottom: "6vw" }}>
+                <Grid item xs={10} sm={10} md={10} style={{ paddingBottom: "6vw" }}>
                     <p style={{ fontWeight: "300", fontSize: "1.5vw" }}> Patent | <span style={{ color: "#1191A3" }}> Machine Learning Lab </span>| <span style={{ color: "#08C089" }}> US Patent Granted </span> </p>
                     <p style={{ fontWeight: "500", color: "#2C2C2C", fontSize: "1.83vw" }}>System and Method For Capturing Horizontal Disparity Stereo Panorama</p>
                     <p style={{ fontWeight: "300", color: "#525252", fontSize: "1.62vw" }}>Application/Patent No - US1054249B2, Application US15/627,224</p>
