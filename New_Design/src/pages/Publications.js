@@ -210,12 +210,14 @@ function Component1() {
 
                 </p>
                 <div style={{ fontSize: "1.28vw", fontWeight: '300' }}>
-                    <p style={{ color: activeIndex === 0 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(0)}>Machine Learning Lab</p>
-                    <p style={{ color: activeIndex === 1 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(1)}>Robotics Research Centre</p>
-                    <p style={{ color: activeIndex === 2 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(2)}>Cognitive science Lab</p>
-                    <p style={{ color: activeIndex === 3 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(3)}>Computer Systems Group</p>
-                    <p style={{ color: activeIndex === 1 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(1)}>Robotics Research Centre</p>
-                    <p style={{ color: activeIndex === 2 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(2)}>Cognitive science Lab</p>
+                    <p style={{ color: activeIndex === 9 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(9)}>Machine Learning Lab</p>
+                    <p style={{ color: activeIndex === 10 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(10)}>Robotics Research Centre</p>
+                    <p style={{ color: activeIndex === 11? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(11)}>Cognitive science Lab</p>
+                    <p style={{ color: activeIndex === 12 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(12)}>Computer Systems Group</p>
+                    <p style={{ color: activeIndex === 13 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(13)}>Robotics Research Centre</p>
+                    <p style={{ color: activeIndex === 14 ? "#1369CB" : "#2C2C2C", }} onClick={() => handlePClick(14)}>Cognitive science Lab</p>
+                    <a style={{ color:  "#1369CB",textDecoration:"None"}} href="#" >Show More</a>
+                    
                 </div>
 
             </div>
