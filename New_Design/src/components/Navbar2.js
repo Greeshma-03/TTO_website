@@ -24,7 +24,7 @@ const ResponsiveNavbar = () => {
           <Nav.Link href="/brief" style={navLinkStyle}>
             Technology Catalogue
           </Nav.Link>
-          <Nav.Link href="/patent" style={navLinkStyle}>
+          <Nav.Link href="/publications" style={navLinkStyle}>
             Patent
           </Nav.Link>
           {/* <Nav.Link href="/canvas" style={navLinkStyle}>

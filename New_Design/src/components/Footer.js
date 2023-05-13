@@ -13,9 +13,10 @@ const styles = {
   width: '100%',
   backgroundColor: '#02858D',
   textAlign: 'center',
-  padding: '10px',
+  paddingTop: '10vw',
   zIndex:100,
-  height:'10vh'
+  height:'10vh',
+
 };
 
 const ItemList = () => {

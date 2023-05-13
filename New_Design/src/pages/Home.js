@@ -77,11 +77,11 @@ const Item = ({ heading, icon, image, description, text }) => (
                 <ResponsiveImage src={icon} alt="icon" maxWidth={400} maxHeight={300}/>
                 <div className="myheading">{heading}</div>
                 <div className="mydescription">{description}</div>
-                <div style={{display:"flex",justifyContent:"center", paddingTop:"1.2vw"}} >
+                {/* <div style={{display:"flex",justifyContent:"center", paddingTop:"1.2vw"}} >
                     <Button variant="contained" style={{ fontWeight: "600", textTransform: 'none', fontSize: "0.93vw", backgroundColor: '#FDFDFD', color: '#073B75', borderRadius: "1.3vw", padding: "0 2.2vw", height: '2.6vw' }}>
                         Visit Page
                     </Button>
-                </div>
+                </div> */}
             </div>
         </div>
 

@@ -7,9 +7,19 @@ import cvit from "../assets/cvit.png"
 import ButtonRow from "../components/Buttonrow"
 import { Maximize } from "@material-ui/icons"
 import { Grid, Paper, Button, Divider } from '@material-ui/core';
+import { useState, useEffect } from "react";
+
 
 
 function Component1() {
+
+    const [activeIndex, setActiveIndex] = useState(null);
+
+    const handlePClick = (index) => {
+        setActiveIndex(index);
+    }
+
+
     return (
         <div style={{ padding: "0 3vw" }}>
             <p style={{ color: '#2C2C2C', fontSize: "1.5vw", fontWeight: '400' }}>
@@ -17,15 +27,14 @@ function Component1() {
                 <Grid item xs={12} style={{ borderBottom: '0.19vw solid #535353', margin: '0.21vw 0' }}></Grid>
 
             </p>
-            <div style={{ fontSize: "1.07vw", fontWeight: 300, }}>
-                <p style={{ color: "#2C2C2C", marginBottom: "1em" }}>360 Degree Stereo Video Camera</p>
-                <p style={{ color: "#2C2C2C", marginBottom: "1em" }}>OCR for Indian languages</p>
-                <p style={{ color: "#2C2C2C", marginBottom: "1em" }}>360 Degree Stereo Video Camera</p>
-                <p style={{ color: "#2C2C2C", marginBottom: "1em" }}>OCR for Indian languages</p>
-                <p style={{ color: "#2C2C2C", marginBottom: "1em" }}>360 Degree Stereo Video Camera</p>
-                <p style={{ color: "#2C2C2C", marginBottom: "1em" }}>360 Degree Stereo Video Camera</p>
-                <p style={{ color: "#2C2C2C", marginBottom: "1em" }}>360 Degree Stereo Video Camera</p>
-
+            <div style={{ fontSize: "1.07vw", fontWeight: 300 }}>
+                <p style={{ color: activeIndex === 0 ? "#1369CB" : "#2C2C2C", marginBottom: "1em" }} onClick={() => handlePClick(0)}>360 Degree Stereo Video Camera</p>
+                <p style={{ color: activeIndex === 1 ? "#1369CB" : "#2C2C2C", marginBottom: "1em" }} onClick={() => handlePClick(1)}>OCR for Indian languages</p>
+                <p style={{ color: activeIndex === 2 ? "#1369CB" : "#2C2C2C", marginBottom: "1em" }} onClick={() => handlePClick(2)}>360 Degree Stereo Video Camera</p>
+                <p style={{ color: activeIndex === 3 ? "#1369CB" : "#2C2C2C", marginBottom: "1em" }} onClick={() => handlePClick(3)}>OCR for Indian languages</p>
+                <p style={{ color: activeIndex === 4 ? "#1369CB" : "#2C2C2C", marginBottom: "1em" }} onClick={() => handlePClick(4)}>360 Degree Stereo Video Camera</p>
+                <p style={{ color: activeIndex === 5 ? "#1369CB" : "#2C2C2C", marginBottom: "1em" }} onClick={() => handlePClick(5)}>360 Degree Stereo Video Camera</p>
+                <p style={{ color: activeIndex === 6 ? "#1369CB" : "#2C2C2C", marginBottom: "1em" }} onClick={() => handlePClick(6)}>360 Degree Stereo Video Camera</p>
             </div>
 
         </div>
@@ -63,8 +72,8 @@ function Patent() {
             <div>
                 <div style={{ paddingTop: "9.08vw" }}>
                     <p style={{ fontFamily: "Montserrat", fontSize: "1.1vw", margin: 0, paddingLeft: "3em" }}>
-                        <span style={{ color: '#9D9D9D',fontWeight:500 }}>Home / CVIT /</span>
-                        <span style={{ color: '#1F669F',fontWeight:500 }}> 360 Degree Stereo Video Camera
+                        <span style={{ color: '#9D9D9D', fontWeight: 500 }}>Home / CVIT /</span>
+                        <span style={{ color: '#1F669F', fontWeight: 500 }}> 360 Degree Stereo Video Camera
                         </span>
                     </p>
                 </div>
@@ -85,7 +94,7 @@ function Patent() {
 
                     <div style={{
                         width: '72vw',
-                        fontFamily: 'Prompt'
+                        fontFamily: 'Prompt',
                     }}>
                         <Component2 />
                     </div>

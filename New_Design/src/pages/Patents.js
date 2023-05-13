@@ -15,6 +15,9 @@ import { Typography, Checkbox, Divider, FormControlLabel, Box, Grid, TextField, 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import { Paper, InputBase } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+
 import classNames from 'classnames';
 
 const useStyles = makeStyles((theme) => ({
@@ -83,6 +86,42 @@ const useStyles = makeStyles((theme) => ({
     checked: {},
 }));
 
+const SearchBar = () => {
+    return (
+        <Paper
+            elevation={0}
+            style={{
+                backgroundColor: '#EEEEEE',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0',
+                width: '20vw',
+                borderRadius: '0.86vw',
+                maxHeight: '4vw'
+            }}
+        >
+            <IconButton
+                type="submit"
+                aria-label="search"
+                style={{
+                    padding: 10,
+                }}
+            >
+                <SearchIcon style={{ fontSize: "2vw" }} />
+            </IconButton>
+            <InputBase
+                placeholder="Search Catalogue"
+                style={{
+                    fontSize: "1.3vw",
+                    flex: 1,
+                }}
+            />
+
+        </Paper>
+    );
+};
+
+
 function Home() {
 
     const classes = useStyles();
@@ -118,9 +157,9 @@ function Home() {
         setShowMoreFilters(false);
     };
 
-    const handleClearAll=()=>{
+    const handleClearAll = () => {
         setShowMoreFilters(false)
-        
+
     }
 
     useEffect(() => {
@@ -142,7 +181,7 @@ function Home() {
                         <span style={{ color: '#1F669F' }}> Patent &nbsp;</span>
                     </p>
                 </div>
-                <Container style={{ maxWidth: "100%", padding: "1em 0", margin: 0 }}>
+                <Container style={{ maxWidth: "100%", padding: "1vw 0", margin: 0 }}>
                     <div style={{ display: "flex" }}>
                         <div style={{ flex: "0 0 10%", }}>
                             <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -155,11 +194,11 @@ function Home() {
                                     }}>Filters</Typography>
                                 </div>
                                 <div>
-                            
+
                                     <Typography variant="h6" style={{ fontFamily: "Hahmlet", fontWeight: 600, color: '#DE3119', fontSize: '24px' }}  >
                                         <Button color="primary" size="small" onClick={handleClearAll}>
-                                                    Clear All
-                                                </Button></Typography>
+                                            Clear All
+                                        </Button></Typography>
 
                                 </div>
                             </div>
