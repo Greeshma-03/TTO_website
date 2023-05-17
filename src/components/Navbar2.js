@@ -1,45 +1,58 @@
-import React, { useState } from 'react'
-import Logo from "../assets/iiit.jpeg"
-import { Link } from "react-router-dom"
-import "../styles/Navbar2.css"
-import ReorderIcon from '@mui/icons-material/Reorder';
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
 
-function Navbar2() {
+const ResponsiveNavbar = () => {
+  return (
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="light"
+      variant="light"
+      style={navbarStyle}
+      className="fixed-top" // Add fixed-top class for fixed positioning
+    >
 
-    const [openLinks, setOpenLinks] = useState(false)
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav
+          className="mx-auto"
+          style={{ gap: '9rem', margin: '0.5rem', padding: '0' }}
+        >
+          <Nav.Link href="/" style={navLinkStyle}>
+            Home
+          </Nav.Link>
+          <Nav.Link href="/brief" style={navLinkStyle}>
+            Technology Catalogue
+          </Nav.Link>
+          <Nav.Link href="/publications" style={navLinkStyle}>
+            Patent
+          </Nav.Link>
+          {/* <Nav.Link href="/canvas" style={navLinkStyle}>
+            Publications
+          </Nav.Link> */}
+          <Nav.Link href="/publications" style={navLinkStyle}>
+            IIITH-Canvas
+          </Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+};
 
-    const toggleNavbar = () => {
-        setOpenLinks(!openLinks);
+const navbarStyle = {
+  background: 'linear-gradient(90deg, #09A5AF 16.15%, #546B81 85.67%)',
+  height: '50px', // Update the height value as desired
+  position: 'fixed', // Add fixed positioning
+  top: '5rem', // Add appropriate value for top position
+  right: '0', // Add appropriate value for right position
+  left: '0' // Add appropriate value for left position
+};
 
-    };
+const navLinkStyle = {
+  fontSize: '1.35vw',
+  fontFamily: 'Hahmlet',
+  color: '#FFFFFF  ',
+  fontWeight: 500
+};
 
-    return (
-
-        <div className="navbar2" style={{ fontSize: '20px' }}>
-            <div className='leftSide'>
-                <div className='hiddenLinks' id={openLinks ? "open" : "close"}>
-                    <Link to="/" style={{ marginRight: "40px" }}>Home</Link>
-                    <Link to="/tech" style={{ marginRight: "10px" }}>Technology Catalogue</Link>
-                    <Link to="/patent" style={{ marginRight: "10px" }}>Patent</Link>
-                    <Link to="/publications">Publications</Link>
-                </div>
-
-            </div>
-            <div className='rightSide'>
-                <Link to="/" style={{ marginRight: "40px" }}>Home</Link>
-                <Link to="/tech" style={{ marginRight: "40px" }}>Technology Catalogue</Link>
-                <Link to="/patent" style={{ marginRight: "40px" }}>Patent</Link>
-                <Link to="/publications">Publications</Link>
-                <button onClick={toggleNavbar}>
-                    <ReorderIcon />
-                </button>
-
-
-            </div>
-        </div>
-
-
-
-    );
-}
-export default Navbar2;
+export default ResponsiveNavbar;
